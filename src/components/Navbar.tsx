@@ -1,12 +1,11 @@
 import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { ERoutes } from "../constants/routes.enum";
-import { Container } from "@mui/material";
 
 export const Navbar: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -17,14 +16,13 @@ export const Navbar: FunctionComponent = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Container maxWidth="xl">
+        <Container>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Ukraine O-Event
-            </Typography>
-            <Button color="inherit" onClick={handleHomeRedirect}>
-              Home
-            </Button>
+            <Box sx={{ flexGrow: 1 }}>
+              <Button color="inherit" onClick={handleHomeRedirect}>
+                Ukraine O-Event
+              </Button>
+            </Box>
             <Button color="inherit" onClick={handleSignUpRedirect}>
               Signup
             </Button>
