@@ -1,4 +1,3 @@
-import { FunctionComponent } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -10,7 +9,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { ERoutes } from "./constants/routes.enum";
 import { Navbar } from "./components/Navbar";
 
-export const App: FunctionComponent = () => {
+export const App = () => {
   return (
     <main className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>

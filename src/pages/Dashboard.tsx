@@ -1,5 +1,3 @@
-import { FunctionComponent } from "react";
-
-export const Dashboard: FunctionComponent = () => {
+export const Dashboard = () => {
   return <div>Dashboard Page</div>;
 };

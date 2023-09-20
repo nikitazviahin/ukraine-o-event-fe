@@ -1,5 +1,3 @@
-import { FunctionComponent } from "react";
-
-export const LogInPage: FunctionComponent = () => {
+export const LogInPage = () => {
   return <div>Login Page</div>;
 };

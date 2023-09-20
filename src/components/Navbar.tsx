@@ -1,4 +1,3 @@
-import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -7,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { ERoutes } from "../constants/routes.enum";
 
-export const Navbar: FunctionComponent = () => {
+export const Navbar = () => {
   const navigate = useNavigate();
   const handleSignUpRedirect = () => navigate(ERoutes.signup);
   const handleLogInRedirect = () => navigate(ERoutes.login);
