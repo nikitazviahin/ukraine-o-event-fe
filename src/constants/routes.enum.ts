@@ -1,6 +1,5 @@
 export enum ERoutes {
   root = "/",
-  login = "/login",
-  signup = "/signup",
+  login = "/auth",
   dashboard = "/dashboard",
 }

@@ -8,12 +8,11 @@ import { ERoutes } from "../constants/routes.enum";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const handleSignUpRedirect = () => navigate(ERoutes.signup);
   const handleLogInRedirect = () => navigate(ERoutes.login);
   const handleHomeRedirect = () => navigate(ERoutes.root);
 
   return (
-    <AppBar>
+    <AppBar position="static">
       <Container>
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
@@ -21,10 +20,6 @@ export const Navbar = () => {
               <Typography variant="button">Ukraine O-Event</Typography>
             </Button>
           </Box>
-
-          <Button onClick={handleSignUpRedirect}>
-            <Typography variant="button">Signup</Typography>
-          </Button>
 
           <Button onClick={handleLogInRedirect}>
             <Typography variant="button">Login</Typography>

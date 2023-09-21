@@ -1,3 +1,5 @@
+import { Container } from "@mui/material";
+
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return <Container maxWidth="md">Home</Container>;
 };

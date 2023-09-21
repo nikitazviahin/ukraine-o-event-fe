@@ -9,21 +9,12 @@ export const theme = createTheme({
   typography: {
     button: {
       color: "#FFFFFF",
-      "@media (max-width:350px)": {
-        fontSize: "0.7rem",
-      },
-      "@media (max-width:300px)": {
-        fontSize: "0.65rem",
-      },
-      "@media (max-width:250px)": {
-        fontSize: "0.6rem",
-      },
     },
   },
   components: {
-    MuiAppBar: {
+    MuiTextField: {
       defaultProps: {
-        position: "static",
+        margin: "dense",
       },
     },
   },
