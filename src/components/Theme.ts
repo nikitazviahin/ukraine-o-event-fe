@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#4CC9F0",
+      main: "#fb8500",
     },
   },
   typography: {
@@ -15,6 +15,10 @@ export const theme = createTheme({
     MuiTextField: {
       defaultProps: {
         margin: "dense",
+        size: "small",
+        sx: {
+          width: "16rem",
+        },
       },
     },
   },
