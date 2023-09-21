@@ -14,7 +14,7 @@ export const Footer = () => {
       <Typography variant="body2" align="center">
         {"Copyright © "}
         <Link color="inherit" href="https://github.com/nikitazviahin">
-          Mykyta Zviahin
+          {"Mykyta Zviahin"}
         </Link>{" "}
         {date}
         {"."}

@@ -17,12 +17,12 @@ export const Navbar = () => {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
             <Button onClick={handleHomeRedirect}>
-              <Typography variant="button">Ukraine O-Event</Typography>
+              <Typography variant="button">{"Ukraine O-Event"}</Typography>
             </Button>
           </Box>
 
           <Button onClick={handleLogInRedirect}>
-            <Typography variant="button">Login</Typography>
+            <Typography variant="button">{"Login"}</Typography>
           </Button>
         </Toolbar>
       </Container>
