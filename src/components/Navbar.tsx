@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,24 +13,24 @@ export const Navbar = () => {
   const handleHomeRedirect = () => navigate(ERoutes.root);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Container>
-          <Toolbar>
-            <Box sx={{ flexGrow: 1 }}>
-              <Button color="inherit" onClick={handleHomeRedirect}>
-                Ukraine O-Event
-              </Button>
-            </Box>
-            <Button color="inherit" onClick={handleSignUpRedirect}>
-              Signup
+    <AppBar>
+      <Container>
+        <Toolbar>
+          <Box sx={{ flexGrow: 1 }}>
+            <Button onClick={handleHomeRedirect}>
+              <Typography variant="button">Ukraine O-Event</Typography>
             </Button>
-            <Button color="inherit" onClick={handleLogInRedirect}>
-              Login
-            </Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
+          </Box>
+
+          <Button onClick={handleSignUpRedirect}>
+            <Typography variant="button">Signup</Typography>
+          </Button>
+
+          <Button onClick={handleLogInRedirect}>
+            <Typography variant="button">Login</Typography>
+          </Button>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
