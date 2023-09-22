@@ -2,8 +2,10 @@ import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import { LoginInput } from "../../validationSchemas/loginSchema";
-import { useLoginValidation } from "../../validationSchemas/validationHooks/useLoginValidation";
+import {
+  LoginInput,
+  useLoginValidation,
+} from "../../validationSchemas/validationHooks/useLoginValidation";
 
 const emailPlaceholderText = "Email";
 const passwordPlaceholderText = "Password";
