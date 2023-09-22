@@ -5,7 +5,10 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { ERoutes } from "../constants/routes.enum";
-import { UkrainianFlag } from "./UkrainianFlag";
+import { UkrainianFlag } from "./icons/UkrainianFlag";
+
+const ukraineOEventText = "Ukraine O-Event";
+const loginText = "Login";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -18,13 +21,13 @@ export const Navbar = () => {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
             <Button onClick={handleHomeRedirect}>
-              <Typography variant="button">{"Ukraine O-Event"}</Typography>
+              <Typography variant="button">{ukraineOEventText}</Typography>
               <UkrainianFlag />
             </Button>
           </Box>
 
           <Button onClick={handleLogInRedirect}>
-            <Typography variant="button">{"Login"}</Typography>
+            <Typography variant="button">{loginText}</Typography>
           </Button>
         </Toolbar>
       </Container>
