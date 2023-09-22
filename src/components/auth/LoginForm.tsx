@@ -1,9 +1,9 @@
 import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import { LoginInput, loginSchema } from "../../validationSchemas/loginSchema";
+import { LoginInput } from "../../validationSchemas/loginSchema";
+import { useLoginValidation } from "../../validationSchemas/validationHooks/useLoginValidation";
 
 const emailPlaceholderText = "Email";
 const passwordPlaceholderText = "Password";
@@ -15,23 +15,20 @@ interface ILoginFormProps {
 export const LoginForm = (loginProps: ILoginFormProps) => {
   const [loading, setLoading] = useState(false);
 
-  const actionButtonText = loginProps.isSignUp ? "register user" : "log in";
-
-  const methods = useForm<LoginInput>({
-    resolver: zodResolver(loginSchema),
-  });
-
   const {
     register,
     formState: { errors, isSubmitSuccessful },
     reset,
     handleSubmit,
-  } = methods;
+  } = useLoginValidation();
+
+  const actionButtonText = loginProps.isSignUp ? "register user" : "log in";
 
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<LoginInput> = (values) => {

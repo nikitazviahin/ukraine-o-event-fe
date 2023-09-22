@@ -1,4 +1,4 @@
-import { z, TypeOf, object, string } from "zod";
+import { TypeOf, object, string } from "zod";
 
 export const registerSchema = object({
   email: string().nonempty("Email is required").email("Email is invalid"),
