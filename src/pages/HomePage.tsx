@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
 
 export const HomePage = () => {
-  return <Container maxWidth="md">Home</Container>;
+  return <Container maxWidth="md">{}</Container>;
 };

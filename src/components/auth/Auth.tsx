@@ -1,5 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
+
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
@@ -21,7 +22,7 @@ export const Auth = () => {
       boxShadow={"2px 2px 5px #ccc"}
     >
       {isSignUp ? (
-        <RegisterForm isSignUp={isSignUp} />
+        <RegisterForm isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
       ) : (
         <LoginForm isSignUp={isSignUp} />
       )}

@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { HttpStatusCode } from "axios";
 import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import { Box, TextField } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { Alert, Box, Collapse, IconButton, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
+
 import {
   RegisterInput,
   useRegisterValidation,
-} from "../../validationSchemas/validationHooks/useRegisterValidation";
-
-interface IRegisterFormProps {
-  isSignUp: boolean;
-}
+} from "../../validationHooks/useRegisterValidation";
+import { postSignUpRequest } from "../../services/authRequests";
+import { IRegisterFormProps } from "./interfaces/IRegisterFormProps";
 
 const emailLabelText = "Email";
 const passwordLabelText = "Password";
@@ -21,30 +22,44 @@ const lastNameLabelText = "Last name";
 const dateOfBirthLabelText = "Date of birth";
 const orienteeringClubLabelText = "Orienteering Club";
 const defaultDateOfBirth = "01/01/1970";
+const userRegisteredSuccessfullyText = "User registered successfully";
 
 export const RegisterForm = (registerProps: IRegisterFormProps) => {
-  const [loading, setLoading] = useState(false);
+  const [successAlertOpen, setSuccessAlertOpen] = useState(false);
+  const [errorAlertOpen, setErrorAlertOpen] = useState(false);
+  const [errorAlertText, setErrorAlertText] = useState();
   const [dateOfBirthValue, setDateOfBirthValue] = useState<Dayjs | Date | null>(
     dayjs(defaultDateOfBirth)
   );
 
   const {
     register,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     reset,
     handleSubmit,
   } = useRegisterValidation();
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSubmitSuccessful]);
+  const onSubmitHandler: SubmitHandler<RegisterInput> = async (values) => {
+    setErrorAlertOpen(false);
+    setSuccessAlertOpen(false);
 
-  const onSubmitHandler: SubmitHandler<RegisterInput> = (values) => {
-    const dateOfBirthValueISO = dayjs(dateOfBirthValue).toISOString();
-    console.log({ ...values, dateOfBirthValueISO });
+    try {
+      const dateOfBirthValueISO = dayjs(dateOfBirthValue).toISOString();
+      const res = await postSignUpRequest({
+        ...values,
+        dateOfBirth: dateOfBirthValueISO,
+      });
+
+      if (res.status === HttpStatusCode.Created) {
+        setSuccessAlertOpen(true);
+      }
+
+      setDateOfBirthValue(null);
+      reset();
+    } catch (error: any) {
+      setErrorAlertOpen(() => true);
+      setErrorAlertText(() => error.message);
+    }
   };
 
   const actionButtonText = registerProps.isSignUp ? "register user" : "log in";
@@ -117,9 +132,47 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         label={orienteeringClubLabelText}
         {...register("orienteeringClub")}
       />
-      <LoadingButton type="submit" loading={loading}>
-        {actionButtonText}
-      </LoadingButton>
+      <LoadingButton type="submit">{actionButtonText}</LoadingButton>
+      <Collapse in={successAlertOpen}>
+        <Alert
+          severity="success"
+          action={
+            <IconButton onClick={() => setSuccessAlertOpen(false)}>
+              <CloseIcon />
+            </IconButton>
+          }
+          sx={{
+            position: "absolute",
+            top: "15%",
+            left: "65%",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          {userRegisteredSuccessfullyText}
+        </Alert>
+      </Collapse>
+      <Collapse in={errorAlertOpen}>
+        <Alert
+          severity="error"
+          action={
+            <IconButton onClick={() => setErrorAlertOpen(false)}>
+              <CloseIcon />
+            </IconButton>
+          }
+          sx={{
+            position: "absolute",
+            top: "15%",
+            left: "65%",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          {errorAlertText}
+        </Alert>
+      </Collapse>
     </Box>
   );
 };
