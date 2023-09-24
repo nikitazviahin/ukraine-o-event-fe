@@ -5,8 +5,8 @@ import {
   ILoginResponse,
   ISignUpBody,
   ISignUpResponse,
-} from "../interfaces/auth.interface";
-import { getProfilePath, loginPath, signUpPath } from "../constants/authPaths";
+} from "../interfaces/authService.interface";
+import { getProfilePath, loginPath, signUpPath } from "../constants/axiosPaths";
 
 export class AuthService {
   public async postLoginRequest(

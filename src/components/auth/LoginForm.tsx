@@ -8,7 +8,7 @@ import {
   LoginInput,
   useLoginValidation,
 } from "../../validationHooks/useLoginValidation";
-import { ILoginBody } from "../../interfaces/auth.interface";
+import { ILoginBody } from "../../interfaces/authService.interface";
 import { ERoutes } from "../../constants/routes.enum";
 import { ILoginFormProps } from "./interfaces/ILoginFormProps";
 import { handleSubmitLogin } from "./authHelpers/handleSugmitLogin";

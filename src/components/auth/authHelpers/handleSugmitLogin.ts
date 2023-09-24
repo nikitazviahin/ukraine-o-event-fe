@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "axios";
-import { ILoginBody } from "../../../interfaces/auth.interface";
+import { ILoginBody } from "../../../interfaces/authService.interface";
 import { AuthServiceInstance } from "../../../services/authService";
 import { jwtToken, userData } from "../../../constants/authLocalStorageData";
 
