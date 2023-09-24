@@ -11,8 +11,8 @@ import {
   RegisterInput,
   useRegisterValidation,
 } from "../../validationHooks/useRegisterValidation";
-import { postSignUpRequest } from "../../services/authRequests";
 import { IRegisterFormProps } from "./interfaces/IRegisterFormProps";
+import { AuthServiceInstance } from "../../services/authService";
 
 const emailLabelText = "Email";
 const passwordLabelText = "Password";
@@ -45,7 +45,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
 
     try {
       const dateOfBirthValueISO = dayjs(dateOfBirthValue).toISOString();
-      const res = await postSignUpRequest({
+      const res = await AuthServiceInstance.postSignUpRequest({
         ...values,
         dateOfBirth: dateOfBirthValueISO,
       });
@@ -61,8 +61,6 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
       setErrorAlertText(() => error.message);
     }
   };
-
-  const actionButtonText = registerProps.isSignUp ? "register user" : "log in";
 
   return (
     <Box
@@ -132,7 +130,9 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         label={orienteeringClubLabelText}
         {...register("orienteeringClub")}
       />
-      <LoadingButton type="submit">{actionButtonText}</LoadingButton>
+      <LoadingButton type="submit">
+        {registerProps.actionButtonText}
+      </LoadingButton>
       <Collapse in={successAlertOpen}>
         <Alert
           severity="success"

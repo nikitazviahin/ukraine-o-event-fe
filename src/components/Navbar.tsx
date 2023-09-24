@@ -8,14 +8,16 @@ import Button from "@mui/material/Button";
 import { ERoutes } from "../constants/routes.enum";
 import { UkrainianFlag } from "./icons/UkrainianFlag";
 import { jwtToken } from "../constants/authLocalStorageData";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ukraineOEventText = "Ukraine O-Event";
 const loginText = "Log in";
 const logOutText = "Log out";
 
 export const Navbar = () => {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem(jwtToken)
+  );
   const navigate = useNavigate();
   const handleLogInRedirect = () => navigate(ERoutes.login);
   const handleHomeRedirect = () => navigate(ERoutes.root);
@@ -24,10 +26,6 @@ export const Navbar = () => {
     localStorage.clear();
     setToken(() => null);
   };
-
-  useEffect(() => {
-    setToken(() => localStorage.getItem(jwtToken));
-  }, [token]);
 
   return (
     <AppBar position="static">

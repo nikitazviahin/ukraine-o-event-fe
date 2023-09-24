@@ -7,6 +7,7 @@ import { RegisterForm } from "./RegisterForm";
 export const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
+  const actionButtonText = isSignUp ? "register user" : "log in";
   const switchButtonText = isSignUp ? "switch to login" : " switch to register";
 
   return (
@@ -22,9 +23,9 @@ export const Auth = () => {
       boxShadow={"2px 2px 5px #ccc"}
     >
       {isSignUp ? (
-        <RegisterForm isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
+        <RegisterForm actionButtonText={actionButtonText} />
       ) : (
-        <LoginForm isSignUp={isSignUp} />
+        <LoginForm actionButtonText={actionButtonText} />
       )}
       <Button size="small" onClick={() => setIsSignUp(!isSignUp)}>
         {switchButtonText}
