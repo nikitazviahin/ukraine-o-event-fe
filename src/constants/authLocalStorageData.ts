@@ -1,2 +1,2 @@
 export const jwtToken = "jwt_token";
-export const userData = "use_data";
+export const userData = "user_data";
