@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: ukraine-o-event-fe
+    image: ukraine-o-event-fe
+    build:
+      context: .
+      target: production
