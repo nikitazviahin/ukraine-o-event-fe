@@ -1,8 +1,7 @@
-import { Alert, Box, Collapse, IconButton, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import CloseIcon from "@mui/icons-material/Close";
 
 import {
   LoginInput,
@@ -12,6 +11,7 @@ import { ILoginBody } from "../../interfaces/authService.interface";
 import { ERoutes } from "../../constants/routes.enum";
 import { ILoginFormProps } from "./interfaces/ILoginFormProps";
 import { handleSubmitLogin } from "./authHelpers/handleSugmitLogin";
+import { CustomAlert } from "../CustomAlert";
 
 const emailPlaceholderText = "Email";
 const passwordPlaceholderText = "Password";
@@ -47,12 +47,15 @@ export const LoginForm = (loginProps: ILoginFormProps) => {
       onSubmit={handleSubmit(onSubmitHandler)}
     >
       <TextField
+        autoComplete="on"
         size="small"
         placeholder={emailPlaceholderText}
+        type="email"
         error={!!errors["email"]}
         helperText={errors["email"] ? errors["email"].message : ""}
         {...register("email")}
       />
+
       <TextField
         size="small"
         type="password"
@@ -61,28 +64,14 @@ export const LoginForm = (loginProps: ILoginFormProps) => {
         helperText={errors["password"] ? errors["password"].message : ""}
         {...register("password")}
       />
-      <LoadingButton type="submit">{loginProps.actionButtonText}</LoadingButton>
 
-      <Collapse in={errorAlertOpen}>
-        <Alert
-          severity="error"
-          action={
-            <IconButton onClick={() => setErrorAlertOpen(false)}>
-              <CloseIcon />
-            </IconButton>
-          }
-          sx={{
-            position: "absolute",
-            top: "15%",
-            left: "65%",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          {errorAlertText}
-        </Alert>
-      </Collapse>
+      <LoadingButton type="submit">{loginProps.actionButtonText}</LoadingButton>
+      <CustomAlert
+        inProp={errorAlertOpen}
+        severityProp={"error"}
+        onClickProp={() => setErrorAlertOpen(false)}
+        alertTextProp={errorAlertText}
+      />
     </Box>
   );
 };

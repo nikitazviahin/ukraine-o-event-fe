@@ -2,8 +2,7 @@ import { useState } from "react";
 import { HttpStatusCode } from "axios";
 import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import CloseIcon from "@mui/icons-material/Close";
-import { Alert, Box, Collapse, IconButton, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -13,6 +12,7 @@ import {
 } from "../../validationHooks/useRegisterValidation";
 import { IRegisterFormProps } from "./interfaces/IRegisterFormProps";
 import { AuthServiceInstance } from "../../services/authService";
+import { CustomAlert } from "../CustomAlert";
 
 const emailLabelText = "Email";
 const passwordLabelText = "Password";
@@ -21,7 +21,6 @@ const firstNameLabelText = "First name";
 const lastNameLabelText = "Last name";
 const dateOfBirthLabelText = "Date of birth";
 const orienteeringClubLabelText = "Orienteering Club";
-const defaultDateOfBirth = "01/01/1970";
 const userRegisteredSuccessfullyText = "User registered successfully";
 
 export const RegisterForm = (registerProps: IRegisterFormProps) => {
@@ -29,7 +28,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
   const [dateOfBirthValue, setDateOfBirthValue] = useState<Dayjs | Date | null>(
-    dayjs(defaultDateOfBirth)
+    null
   );
 
   const {
@@ -71,11 +70,13 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
     >
       <TextField
         type="email"
+        autoComplete="on"
         label={emailLabelText}
         error={!!errors["email"]}
         helperText={errors["email"] ? errors["email"].message : ""}
         {...register("email")}
       />
+
       <TextField
         type="password"
         label={passwordLabelText}
@@ -83,6 +84,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         helperText={errors["password"] ? errors["password"].message : ""}
         {...register("password")}
       />
+
       <TextField
         type="password"
         label={confirmPasswordLabelText}
@@ -92,6 +94,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         }
         {...register("passwordConfirm")}
       />
+
       <Box
         sx={{
           display: "flex",
@@ -99,13 +102,16 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         }}
       >
         <TextField
+          type="text"
           sx={{ paddingRight: "0.2rem" }}
           label={firstNameLabelText}
           error={!!errors["firstName"]}
           helperText={errors["firstName"] ? errors["firstName"].message : ""}
           {...register("firstName")}
         />
+
         <TextField
+          type="text"
           sx={{ paddingLeft: "0.2rem" }}
           label={lastNameLabelText}
           error={!!errors["lastName"]}
@@ -113,6 +119,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
           {...register("lastName")}
         />
       </Box>
+
       <DatePicker
         format="DD.MM.YYYY"
         label={dateOfBirthLabelText}
@@ -126,53 +133,34 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
           },
         }}
       />
+
       <TextField
+        type="text"
+        error={!!errors["orienteeringClub"]}
+        helperText={
+          errors["orienteeringClub"] ? errors["orienteeringClub"].message : ""
+        }
         label={orienteeringClubLabelText}
         {...register("orienteeringClub")}
       />
+
       <LoadingButton type="submit">
         {registerProps.actionButtonText}
       </LoadingButton>
-      <Collapse in={successAlertOpen}>
-        <Alert
-          severity="success"
-          action={
-            <IconButton onClick={() => setSuccessAlertOpen(false)}>
-              <CloseIcon />
-            </IconButton>
-          }
-          sx={{
-            position: "absolute",
-            top: "15%",
-            left: "65%",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          {userRegisteredSuccessfullyText}
-        </Alert>
-      </Collapse>
-      <Collapse in={errorAlertOpen}>
-        <Alert
-          severity="error"
-          action={
-            <IconButton onClick={() => setErrorAlertOpen(false)}>
-              <CloseIcon />
-            </IconButton>
-          }
-          sx={{
-            position: "absolute",
-            top: "15%",
-            left: "65%",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          {errorAlertText}
-        </Alert>
-      </Collapse>
+
+      <CustomAlert
+        inProp={successAlertOpen}
+        severityProp={"success"}
+        onClickProp={() => setSuccessAlertOpen(false)}
+        alertTextProp={userRegisteredSuccessfullyText}
+      />
+
+      <CustomAlert
+        inProp={errorAlertOpen}
+        severityProp={"error"}
+        onClickProp={() => setErrorAlertOpen(false)}
+        alertTextProp={errorAlertText}
+      />
     </Box>
   );
 };

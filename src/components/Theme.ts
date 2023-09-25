@@ -21,5 +21,17 @@ export const theme = createTheme({
         },
       },
     },
+    MuiAlert: {
+      defaultProps: {
+        sx: {
+          position: "absolute",
+          top: "75%",
+          left: "39%",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+        },
+      },
+    },
   },
 });
