@@ -48,8 +48,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## ENV EXAMPLE
 
 REACT_APP_BASE_BACKEND_URL=
-HOST="0.0.0.0"
-
 
 script for docker build of frontend into prod:
- docker-compose -f docker-compose.prod.yml build
+docker-compose -f docker-compose.prod.yml build
