@@ -7,7 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { ERoutes } from "./constants/routes.enum";
 import { Navbar } from "./components/Navbar";
-import { theme } from "./components/Theme";
+import { theme } from "./theme";
 import { Footer } from "./components/Footer";
 import { AuthPage } from "./pages/AuthPage";
 
