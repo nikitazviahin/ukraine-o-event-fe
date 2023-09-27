@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -7,24 +8,38 @@ import Button from "@mui/material/Button";
 
 import { ERoutes } from "../constants/routes.enum";
 import { UkrainianFlag } from "./icons/UkrainianFlag";
-import { jwtToken } from "../constants/authLocalStorageData";
-import { useState } from "react";
+import {
+  jwtTokenConst,
+  userRolesConst,
+} from "../constants/authLocalStorageData";
+import { EUserRole } from "../interfaces/role.enum";
 
 const ukraineOEventText = "Ukraine O-Event";
+const createCompetitionText = "Create Competition";
 const loginText = "Log in";
 const logOutText = "Log out";
 
 export const Navbar = () => {
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem(jwtToken)
+    localStorage.getItem(jwtTokenConst)
   );
+  const [userRoles, setUserRoles] = useState<string[]>(
+    JSON.parse(localStorage.getItem(userRolesConst) || "[]")
+  );
+
   const navigate = useNavigate();
   const handleLogInRedirect = () => navigate(ERoutes.login);
   const handleHomeRedirect = () => navigate(ERoutes.root);
+  const handleCreateCompetitionRedirect = () =>
+    navigate(ERoutes.createCompetition);
+
+  const isCreator = userRoles.includes(EUserRole.Creator);
 
   const handleLogout = () => {
     localStorage.clear();
     setToken(() => null);
+    setUserRoles(() => []);
+    navigate(ERoutes.root);
   };
 
   return (
@@ -37,6 +52,12 @@ export const Navbar = () => {
               <UkrainianFlag />
             </Button>
           </Box>
+
+          {isCreator && (
+            <Button onClick={handleCreateCompetitionRedirect}>
+              <Typography variant="button">{createCompetitionText}</Typography>
+            </Button>
+          )}
 
           {token ? (
             <Button>

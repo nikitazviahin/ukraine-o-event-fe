@@ -21,7 +21,7 @@ export const CompetitionDashboard = () => {
     <Box sx={{ marginTop: "2rem", border: 1 }}>
       <Typography sx={{ padding: 0.5 }}>Events:</Typography>
       {competitions.map((c) => {
-        return <Typography>{`${c.name}`}</Typography>;
+        return <Typography>{`${c.name} ${c.competitionDate}`}</Typography>;
       })}
     </Box>
   );

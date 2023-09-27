@@ -10,6 +10,7 @@ import { Navbar } from "./components/Navbar";
 import { theme } from "./theme";
 import { Footer } from "./components/Footer";
 import { AuthPage } from "./pages/AuthPage";
+import { CreateCompetitionPage } from "./pages/CreateCompetitionPage";
 
 export const App = () => {
   return (
@@ -21,6 +22,10 @@ export const App = () => {
             <Routes>
               <Route path={ERoutes.root} element={<HomePage />}></Route>
               <Route path={ERoutes.login} element={<AuthPage />}></Route>
+              <Route
+                path={ERoutes.createCompetition}
+                element={<CreateCompetitionPage />}
+              ></Route>
               <Route
                 path={ERoutes.dashboard}
                 element={<DashboardPage />}

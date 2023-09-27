@@ -1,7 +1,11 @@
 import { HttpStatusCode } from "axios";
 import { ILoginBody } from "../../../interfaces/authService.interface";
 import { AuthServiceInstance } from "../../../services/authService";
-import { jwtToken, userData } from "../../../constants/authLocalStorageData";
+import {
+  jwtTokenConst,
+  userDataConst,
+  userRolesConst,
+} from "../../../constants/authLocalStorageData";
 
 export async function handleSubmitLogin(values: ILoginBody) {
   const res = await AuthServiceInstance.postLoginRequest(values);
@@ -20,6 +24,13 @@ export async function handleSubmitLogin(values: ILoginBody) {
     throw new Error("Unable to get user's profile");
   }
 
-  localStorage.setItem(jwtToken, token);
-  localStorage.setItem(userData, JSON.stringify(getUserProfileResponse.data));
+  localStorage.setItem(jwtTokenConst, token);
+  localStorage.setItem(
+    userDataConst,
+    JSON.stringify(getUserProfileResponse.data)
+  );
+  localStorage.setItem(
+    userRolesConst,
+    JSON.stringify(getUserProfileResponse.data.roles)
+  );
 }
