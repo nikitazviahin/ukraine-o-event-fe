@@ -8,11 +8,8 @@ import Button from "@mui/material/Button";
 
 import { ERoutes } from "../types/enums/route.enum";
 import { UkrainianFlag } from "./icons/UkrainianFlag";
-import {
-  jwtTokenConst,
-  userRolesConst,
-} from "../constants/localStorage";
-import { EUserRole } from "../types/enums/role.enum";
+import { jwtTokenConst } from "../constants/localStorage";
+import { getIsCreator } from "../helpers/getIsCreator";
 
 const ukraineOEventText = "Ukraine O-Event";
 const createCompetitionText = "Create Competition";
@@ -23,9 +20,6 @@ export const Navbar = () => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem(jwtTokenConst)
   );
-  const [userRoles, setUserRoles] = useState<string[]>(
-    JSON.parse(localStorage.getItem(userRolesConst) || "[]")
-  );
 
   const navigate = useNavigate();
   const handleLogInRedirect = () => navigate(ERoutes.login);
@@ -33,12 +27,11 @@ export const Navbar = () => {
   const handleCreateCompetitionRedirect = () =>
     navigate(ERoutes.createCompetition);
 
-  const isCreator = userRoles.includes(EUserRole.Creator);
+  const isCreator = getIsCreator();
 
   const handleLogout = () => {
     localStorage.clear();
     setToken(() => null);
-    setUserRoles(() => []);
     navigate(ERoutes.root);
   };
 
