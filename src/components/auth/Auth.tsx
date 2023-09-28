@@ -16,7 +16,7 @@ export const Auth = () => {
       flexDirection={"column"}
       maxWidth={"20rem"}
       alignItems={"center"}
-      margin="auto"
+      margin={"auto"}
       marginTop={"4rem"}
       padding={"1rem"}
       borderRadius={3}

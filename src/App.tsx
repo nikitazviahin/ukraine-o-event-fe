@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material";
 
 import { HomePage } from "./pages/HomePage";
 import { DashboardPage } from "./pages/DashboardPage";
-import { ERoutes } from "./constants/routes.enum";
+import { ERoutes } from "./types/enums/route.enum";
 import { Navbar } from "./components/Navbar";
 import { theme } from "./theme";
 import { Footer } from "./components/Footer";

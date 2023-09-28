@@ -1,7 +1,7 @@
 import { Alert, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { ICustomAlertProps } from "./interfaces/cusomAlert.interface";
+import { ICustomAlertProps } from "./types/cusomAlert.interface";
 
 export const CustomAlert = (customAlertProps: ICustomAlertProps) => {
   return (

@@ -6,13 +6,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 
-import { ERoutes } from "../constants/routes.enum";
+import { ERoutes } from "../types/enums/route.enum";
 import { UkrainianFlag } from "./icons/UkrainianFlag";
 import {
   jwtTokenConst,
   userRolesConst,
-} from "../constants/authLocalStorageData";
-import { EUserRole } from "../interfaces/role.enum";
+} from "../constants/localStorage";
+import { EUserRole } from "../types/enums/role.enum";
 
 const ukraineOEventText = "Ukraine O-Event";
 const createCompetitionText = "Create Competition";

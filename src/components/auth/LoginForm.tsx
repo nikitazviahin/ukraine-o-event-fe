@@ -7,11 +7,14 @@ import {
   LoginInput,
   useLoginValidation,
 } from "../../validationHooks/useLoginValidation";
-import { ILoginBody } from "../../interfaces/authService.interface";
-import { ERoutes } from "../../constants/routes.enum";
-import { ILoginFormProps } from "./interfaces/ILoginFormProps";
-import { handleSubmitLogin } from "./authHelpers/handleSugmitLogin";
+import { ILoginBody } from "../../types/auth.types";
+import { ERoutes } from "../../types/enums/route.enum";
+import { handleSubmitLogin } from "./helpers/handleSugmitLogin";
 import { CustomAlert } from "../CustomAlert";
+
+export interface ILoginFormProps {
+  actionButtonText: string;
+}
 
 const emailPlaceholderText = "Email";
 const passwordPlaceholderText = "Password";

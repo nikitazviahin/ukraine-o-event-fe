@@ -1,4 +1,4 @@
-import { EUserRole } from "./role.enum";
+import { EUserRole } from "./enums/role.enum";
 
 export interface ILoginBody {
   email: string;

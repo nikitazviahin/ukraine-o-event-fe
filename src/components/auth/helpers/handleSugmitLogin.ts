@@ -1,11 +1,11 @@
 import { HttpStatusCode } from "axios";
-import { ILoginBody } from "../../../interfaces/authService.interface";
-import { AuthServiceInstance } from "../../../services/authService";
+import { ILoginBody } from "../../../types/auth.types";
+import { AuthServiceInstance } from "../../../api/auth.api";
 import {
   jwtTokenConst,
   userDataConst,
   userRolesConst,
-} from "../../../constants/authLocalStorageData";
+} from "../../../constants/localStorage";
 
 export async function handleSubmitLogin(values: ILoginBody) {
   const res = await AuthServiceInstance.postLoginRequest(values);

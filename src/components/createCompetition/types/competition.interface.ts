@@ -1,6 +1,8 @@
-import { EClass } from "./class.enum";
+import { EClass } from "../../../types/enums/class.enum";
 
 export interface ICompetiton {
+  _id?: string;
+
   name: string;
 
   description: string;

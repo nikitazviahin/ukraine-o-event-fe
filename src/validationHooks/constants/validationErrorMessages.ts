@@ -21,3 +21,13 @@ export const RegisterValidationErrorMessages = {
     "Orienteering club name must be less than 100 characters",
   passwordDoNotMatch: "Passwords do not match",
 };
+
+export const CreateCompetitionErrorMessages = {
+  nameIsRequired: "Competition name is required",
+  nameMore: "Competition name should be less than 100 characters",
+  descriptionIsRequired: "Competition description is required",
+  descriptionMore:
+    "Competition description should be less than 5000 characters",
+  placeIsRequired: "Competition place is required",
+  plaseMore: "Place name should be less than 100 characters",
+};

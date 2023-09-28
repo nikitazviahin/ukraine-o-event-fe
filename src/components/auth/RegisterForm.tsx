@@ -10,9 +10,12 @@ import {
   RegisterInput,
   useRegisterValidation,
 } from "../../validationHooks/useRegisterValidation";
-import { IRegisterFormProps } from "./interfaces/IRegisterFormProps";
-import { AuthServiceInstance } from "../../services/authService";
+import { AuthServiceInstance } from "../../api/auth.api";
 import { CustomAlert } from "../CustomAlert";
+
+export interface IRegisterFormProps {
+  actionButtonText: string;
+}
 
 const emailLabelText = "Email";
 const passwordLabelText = "Password";

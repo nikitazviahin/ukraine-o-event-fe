@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { ICompetiton } from "./interfaces/competition.interface";
-import { CompetitionServiceInstance } from "../../services/competitionService";
+import { ICompetiton } from "../createCompetition/types/competition.interface";
+import { CompetitionServiceInstance } from "../../api/competition.api";
 
 export const CompetitionDashboard = () => {
   const [competitions, setCompetitions] = useState<ICompetiton[]>([]);
@@ -21,7 +21,11 @@ export const CompetitionDashboard = () => {
     <Box sx={{ marginTop: "2rem", border: 1 }}>
       <Typography sx={{ padding: 0.5 }}>Events:</Typography>
       {competitions.map((c) => {
-        return <Typography>{`${c.name} ${c.competitionDate}`}</Typography>;
+        return (
+          <Typography
+            key={c._id}
+          >{`${c._id} ${c.competitionDate} ${c.classes}`}</Typography>
+        );
       })}
     </Box>
   );
