@@ -4,7 +4,6 @@ import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import { Box, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
 
 import {
   RegisterInput,
@@ -12,6 +11,8 @@ import {
 } from "../../validationHooks/useRegisterValidation";
 import { AuthServiceInstance } from "../../api/auth.api";
 import { CustomAlert } from "../CustomAlert";
+import { parseISOString } from "../../helpers/parseISOString";
+import { TDate } from "../../types/date.type";
 
 export interface IRegisterFormProps {
   actionButtonText: string;
@@ -30,9 +31,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
-  const [dateOfBirthValue, setDateOfBirthValue] = useState<Dayjs | Date | null>(
-    null
-  );
+  const [dateOfBirthValue, setDateOfBirthValue] = useState<TDate>(null);
 
   const {
     register,
@@ -46,7 +45,8 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
     setSuccessAlertOpen(false);
 
     try {
-      const dateOfBirthValueISO = dayjs(dateOfBirthValue).toISOString();
+      const dateOfBirthValueISO = parseISOString(dateOfBirthValue);
+
       const res = await AuthServiceInstance.postSignUpRequest({
         ...values,
         dateOfBirth: dateOfBirthValueISO,
@@ -126,15 +126,14 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
       <DatePicker
         format="DD.MM.YYYY"
         label={dateOfBirthLabelText}
-        sx={{ width: "16rem" }}
-        value={dateOfBirthValue}
         disableFuture
-        onChange={(newValue) => setDateOfBirthValue(newValue)}
         slotProps={{
           field: {
             readOnly: true,
           },
         }}
+        value={dateOfBirthValue}
+        onChange={setDateOfBirthValue}
       />
 
       <TextField

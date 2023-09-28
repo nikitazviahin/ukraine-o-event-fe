@@ -1,7 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
 import { HttpStatusCode } from "axios";
 import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
@@ -15,6 +14,8 @@ import { CompetitionServiceInstance } from "../../api/competition.api";
 import { EClass } from "../../types/enums/class.enum";
 import { jwtTokenConst } from "../../constants/localStorage";
 import { SelectClass } from "./SelectClass";
+import { TDate } from "../../types/date.type";
+import { parseISOString } from "../../helpers/parseISOString";
 
 const competitonNameLabelText = "Name of the competition";
 const competitionDescriptionLabelText = "Description of the competition";
@@ -28,9 +29,8 @@ export const CreateCompetitionForm = () => {
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
   const [classes, setClasses] = useState<EClass[]>([]);
-  const [dateOfCompetitionValue, setDateOfCompetitionValue] = useState<
-    Dayjs | Date | null
-  >(null);
+  const [dateOfCompetitionValue, setDateOfCompetitionValue] =
+    useState<TDate>(null);
 
   const token = localStorage.getItem(jwtTokenConst);
 
@@ -48,9 +48,8 @@ export const CreateCompetitionForm = () => {
     setSuccessAlertOpen(false);
 
     try {
-      const dateofCompetitionValueISO = dayjs(
-        dateOfCompetitionValue
-      ).toISOString();
+      const dateofCompetitionValueISO = parseISOString(dateOfCompetitionValue);
+
       const res = await CompetitionServiceInstance.createCompetition(
         {
           ...values,
