@@ -2,7 +2,7 @@ import { Box, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { HttpStatusCode } from "axios";
-import { SubmitHandler } from "react-hook-form";
+import { Controller, SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 
 import {
@@ -14,7 +14,6 @@ import { CompetitionServiceInstance } from "../../api/competition.api";
 import { EClass } from "../../types/enums/class.enum";
 import { jwtTokenConst } from "../../constants/localStorage";
 import { SelectClass } from "./SelectClass";
-import { TDate } from "../../types/date.type";
 import { parseISOString } from "../../helpers/parseISOString";
 
 const competitonNameLabelText = "Name of the competition";
@@ -29,16 +28,16 @@ export const CreateCompetitionForm = () => {
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
   const [classes, setClasses] = useState<EClass[]>([]);
-  const [dateOfCompetitionValue, setDateOfCompetitionValue] =
-    useState<TDate>(null);
 
   const token = localStorage.getItem(jwtTokenConst);
 
   const {
+    control,
     register,
     formState: { errors },
     reset,
     handleSubmit,
+    getValues,
   } = useCreateCompetitionValidation();
 
   const onSubmitHandler: SubmitHandler<CreateCompetitionInput> = async (
@@ -48,7 +47,7 @@ export const CreateCompetitionForm = () => {
     setSuccessAlertOpen(false);
 
     try {
-      const dateofCompetitionValueISO = parseISOString(dateOfCompetitionValue);
+      const dateofCompetitionValueISO = parseISOString(values.competitionDate);
 
       const res = await CompetitionServiceInstance.createCompetition(
         {
@@ -63,7 +62,6 @@ export const CreateCompetitionForm = () => {
         setSuccessAlertOpen(true);
       }
 
-      setDateOfCompetitionValue(null);
       setClasses([]);
       reset();
     } catch (error: any) {
@@ -108,16 +106,33 @@ export const CreateCompetitionForm = () => {
         {...register("description")}
       />
 
-      <DatePicker
-        format="DD.MM.YYYY"
-        label={dateOfCompetitionLabelText}
-        sx={{ width: "20rem" }}
-        value={dateOfCompetitionValue}
-        onChange={(newValue) => setDateOfCompetitionValue(newValue)}
-        slotProps={{
-          field: {
-            readOnly: true,
-          },
+      <Controller
+        control={control}
+        name={"competitionDate"}
+        render={({ field }) => {
+          return (
+            <DatePicker
+              format="DD.MM.YYYY"
+              label={dateOfCompetitionLabelText}
+              onChange={(date) => {
+                field.onChange(date);
+              }}
+              sx={{ width: "20rem" }}
+              disableFuture
+              slotProps={{
+                field: {
+                  readOnly: true,
+                },
+                textField: {
+                  error: !!errors["competitionDate"],
+                  helperText: errors["competitionDate"]
+                    ? errors["competitionDate"].message
+                    : "",
+                  value: getValues().competitionDate,
+                },
+              }}
+            />
+          );
         }}
       />
 

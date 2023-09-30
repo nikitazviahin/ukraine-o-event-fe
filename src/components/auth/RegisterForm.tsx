@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HttpStatusCode } from "axios";
-import { SubmitHandler } from "react-hook-form";
+import { Controller, SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import { Box, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -12,10 +12,10 @@ import {
 import { AuthServiceInstance } from "../../api/auth.api";
 import { CustomAlert } from "../CustomAlert";
 import { parseISOString } from "../../helpers/parseISOString";
-import { TDate } from "../../types/date.type";
 
 export interface IRegisterFormProps {
   actionButtonText: string;
+  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const emailLabelText = "Email";
@@ -25,19 +25,21 @@ const firstNameLabelText = "First name";
 const lastNameLabelText = "Last name";
 const dateOfBirthLabelText = "Date of birth";
 const orienteeringClubLabelText = "Orienteering Club";
-const userRegisteredSuccessfullyText = "User registered successfully";
+const userRegisteredSuccessfullyText =
+  "User registered successfully, switcing to login...";
 
 export const RegisterForm = (registerProps: IRegisterFormProps) => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
-  const [dateOfBirthValue, setDateOfBirthValue] = useState<TDate>(null);
 
   const {
+    control,
     register,
     formState: { errors },
     reset,
     handleSubmit,
+    getValues,
   } = useRegisterValidation();
 
   const onSubmitHandler: SubmitHandler<RegisterInput> = async (values) => {
@@ -45,7 +47,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
     setSuccessAlertOpen(false);
 
     try {
-      const dateOfBirthValueISO = parseISOString(dateOfBirthValue);
+      const dateOfBirthValueISO = parseISOString(values.dateOfBirth);
 
       const res = await AuthServiceInstance.postSignUpRequest({
         ...values,
@@ -56,8 +58,11 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         setSuccessAlertOpen(true);
       }
 
-      setDateOfBirthValue(null);
       reset();
+
+      setTimeout(() => {
+        registerProps.setIsSignUp(false);
+      }, 2000);
     } catch (error: any) {
       setErrorAlertOpen(() => true);
       setErrorAlertText(() => error.message);
@@ -123,17 +128,33 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         />
       </Box>
 
-      <DatePicker
-        format="DD.MM.YYYY"
-        label={dateOfBirthLabelText}
-        disableFuture
-        slotProps={{
-          field: {
-            readOnly: true,
-          },
+      <Controller
+        control={control}
+        name={"dateOfBirth"}
+        render={({ field }) => {
+          return (
+            <DatePicker
+              format="DD.MM.YYYY"
+              label={dateOfBirthLabelText}
+              onChange={(date) => {
+                field.onChange(date);
+              }}
+              disableFuture
+              slotProps={{
+                field: {
+                  readOnly: true,
+                },
+                textField: {
+                  error: !!errors["dateOfBirth"],
+                  helperText: errors["dateOfBirth"]
+                    ? errors["dateOfBirth"].message
+                    : "",
+                  value: getValues().dateOfBirth,
+                },
+              }}
+            />
+          );
         }}
-        value={dateOfBirthValue}
-        onChange={setDateOfBirthValue}
       />
 
       <TextField

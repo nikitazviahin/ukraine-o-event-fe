@@ -23,7 +23,7 @@ export const Auth = () => {
       boxShadow={"2px 2px 5px #ccc"}
     >
       {isSignUp ? (
-        <RegisterForm actionButtonText={actionButtonText} />
+        <RegisterForm actionButtonText={actionButtonText} setIsSignUp={setIsSignUp}/>
       ) : (
         <LoginForm actionButtonText={actionButtonText} />
       )}
