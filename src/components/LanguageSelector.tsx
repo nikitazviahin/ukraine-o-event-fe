@@ -10,7 +10,7 @@ const LanguageSelector = () => {
   const [language, setLanguage] = useState(
     currentLanguage ? currentLanguage : InterfaceLanguage.UA
   );
-
+  
   const handleChange = (event: SelectChangeEvent) => {
     setLanguage(event.target.value as string);
     window.location.reload();
