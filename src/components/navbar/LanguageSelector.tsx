@@ -1,8 +1,9 @@
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useEffect, useState } from "react";
-import { languageConst } from "../constants/localStorage";
-import { InterfaceLanguage } from "../types/enums/language.enum";
-import i18n from "../i28n";
+
+import { languageConst } from "../../constants/localStorage";
+import { InterfaceLanguage } from "../../types/enums/language.enum";
+import i18n from "../../i18n/i28n";
 
 const currentLanguage = localStorage.getItem(languageConst);
 

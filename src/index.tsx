@@ -4,7 +4,7 @@ import { I18nextProvider } from "react-i18next";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import i18n from "./i28n";
+import i18n from "./i18n/i28n";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
