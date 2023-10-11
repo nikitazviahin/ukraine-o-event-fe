@@ -11,7 +11,7 @@ const LanguageSelector = () => {
   const [language, setLanguage] = useState(
     currentLanguage ? currentLanguage : InterfaceLanguage.UA
   );
-  
+
   const handleChange = (event: SelectChangeEvent) => {
     setLanguage(event.target.value as string);
     window.location.reload();
@@ -25,15 +25,18 @@ const LanguageSelector = () => {
   return (
     <Select
       sx={{
-        maxHeight: "2rem",
-        boxShadow: "none",
         ".MuiOutlinedInput-notchedOutline": { border: 0 },
       }}
       value={language}
       onChange={handleChange}
     >
-      <MenuItem value={InterfaceLanguage.UA}>{InterfaceLanguage.UA}</MenuItem>
-      <MenuItem value={InterfaceLanguage.EN}>{InterfaceLanguage.EN}</MenuItem>
+      {Object.values(InterfaceLanguage).map((lang) => {
+        return (
+          <MenuItem key={lang} value={lang}>
+            {lang.toUpperCase()}
+          </MenuItem>
+        );
+      })}
     </Select>
   );
 };
