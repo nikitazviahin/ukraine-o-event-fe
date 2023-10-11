@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 import { Container, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,12 +9,16 @@ import Button from "@mui/material/Button";
 
 import { ERoutes } from "../types/enums/route.enum";
 import { UkrainianFlag } from "./icons/UkrainianFlag";
-import { jwtTokenConst } from "../constants/localStorage";
+import {
+  jwtTokenConst,
+  userDataConst,
+  userRolesConst,
+} from "../constants/localStorage";
 import { getIsCreator } from "../helpers/getIsCreator";
+import LanguageSelector from "./LanguageSelector";
 
 const ukraineOEventText = "Ukraine O-Event";
 const createCompetitionText = "Create Competition";
-const loginText = "Log in";
 const logOutText = "Log out";
 
 export const Navbar = () => {
@@ -30,7 +35,10 @@ export const Navbar = () => {
   const isCreator = getIsCreator();
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem(jwtTokenConst);
+    localStorage.removeItem(userDataConst);
+    localStorage.removeItem(userRolesConst);
+
     setToken(() => null);
     navigate(ERoutes.root);
   };
@@ -63,9 +71,11 @@ export const Navbar = () => {
             </Button>
           ) : (
             <Button variant={"contained"} onClick={handleLogInRedirect}>
-              <Typography variant="button">{loginText}</Typography>
+              <Typography variant="button">{t("logIn")}</Typography>
             </Button>
           )}
+
+          <LanguageSelector />
         </Toolbar>
       </Container>
     </AppBar>

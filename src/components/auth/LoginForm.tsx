@@ -68,7 +68,7 @@ export const LoginForm = (loginProps: ILoginFormProps) => {
         {...register("password")}
       />
 
-      <LoadingButton variant={"contained"} type="submit" sx={{}}>
+      <LoadingButton variant={"contained"} type="submit">
         <Typography variant="button">{loginProps.actionButtonText}</Typography>
       </LoadingButton>
       <CustomAlert
