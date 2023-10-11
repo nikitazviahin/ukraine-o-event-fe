@@ -2,6 +2,7 @@ import { TypeOf, object, string, z } from "zod";
 import { CreateCompetitionErrorMessages } from "./constants/validationErrorMessages";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { fixDateOffset } from "../helpers/fixDateOffset";
 
 const createCompetitionSchema = object({
   name: string()
@@ -10,7 +11,7 @@ const createCompetitionSchema = object({
   description: string()
     .nonempty(CreateCompetitionErrorMessages.descriptionIsRequired)
     .max(5000, CreateCompetitionErrorMessages.descriptionMore),
-  competitionDate: z.coerce.date(),
+  competitionDate: z.coerce.date().transform(fixDateOffset),
   place: string()
     .nonempty(CreateCompetitionErrorMessages.placeIsRequired)
     .max(100, CreateCompetitionErrorMessages.plaseMore),

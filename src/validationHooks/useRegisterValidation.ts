@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TypeOf, object, string, z } from "zod";
 import { RegisterValidationErrorMessages } from "./constants/validationErrorMessages";
+import { fixDateOffset } from "../helpers/fixDateOffset";
 
 const registerSchema = object({
   email: string()
@@ -20,7 +21,7 @@ const registerSchema = object({
   lastName: string()
     .nonempty(RegisterValidationErrorMessages.lastNameRequired)
     .max(50, RegisterValidationErrorMessages.lastNameLess),
-  dateOfBirth: z.coerce.date(),
+  dateOfBirth: z.coerce.date().transform(fixDateOffset),
   orienteeringClub: string().max(
     100,
     RegisterValidationErrorMessages.orienteeringClubLess
