@@ -27,7 +27,7 @@ export const CreateCompetitionForm = () => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
-  const [classes, setClasses] = useState<EClass[]>([]);
+  const [classes, setClasses] = useState<EClass[]>([EClass.M21, EClass.W21]);
 
   const token = localStorage.getItem(jwtTokenConst);
 
@@ -114,11 +114,8 @@ export const CreateCompetitionForm = () => {
             <DatePicker
               format="DD.MM.YYYY"
               label={dateOfCompetitionLabelText}
-              onChange={(date) => {
-                field.onChange(date);
-              }}
+              onChange={field.onChange}
               sx={{ width: "20rem" }}
-              disableFuture
               slotProps={{
                 field: {
                   readOnly: true,

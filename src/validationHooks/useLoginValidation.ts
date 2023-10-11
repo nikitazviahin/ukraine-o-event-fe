@@ -10,8 +10,8 @@ const loginSchema = object({
     .email(LoginValidationErrorMessages.emailIsInvalid),
   password: string()
     .nonempty(LoginValidationErrorMessages.passwordIsRequired)
-    .min(6, LoginValidationErrorMessages.passwordLess)
-    .max(32, LoginValidationErrorMessages.passwordMore),
+    .min(6, LoginValidationErrorMessages.passwordMore)
+    .max(32, LoginValidationErrorMessages.passwordLess),
 });
 
 export type LoginInput = TypeOf<typeof loginSchema>;

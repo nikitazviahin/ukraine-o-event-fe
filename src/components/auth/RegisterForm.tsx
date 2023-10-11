@@ -26,7 +26,7 @@ const lastNameLabelText = "Last name";
 const dateOfBirthLabelText = "Date of birth";
 const orienteeringClubLabelText = "Orienteering Club";
 const userRegisteredSuccessfullyText =
-  "User registered successfully, switcing to login...";
+  "User registered successfully, redirecting to login...";
 
 export const RegisterForm = (registerProps: IRegisterFormProps) => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
@@ -136,9 +136,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
             <DatePicker
               format="DD.MM.YYYY"
               label={dateOfBirthLabelText}
-              onChange={(date) => {
-                field.onChange(date);
-              }}
+              onChange={field.onChange}
               disableFuture
               slotProps={{
                 field: {

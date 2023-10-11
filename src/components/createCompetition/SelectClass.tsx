@@ -20,7 +20,7 @@ export const SelectClass = (selectClassProps: SelectClassProps) => {
     <FormControl sx={{ margin: "0.5rem" }}>
       <InputLabel>{selectClassLabelText}</InputLabel>
       <Select
-        aria-label="asdasd"
+        aria-label="selectClass"
         id={"selectClass"}
         label={selectClassLabelText}
         sx={{ width: "20rem" }}
