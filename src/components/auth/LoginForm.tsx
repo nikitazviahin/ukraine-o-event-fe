@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
@@ -68,7 +68,9 @@ export const LoginForm = (loginProps: ILoginFormProps) => {
         {...register("password")}
       />
 
-      <LoadingButton type="submit">{loginProps.actionButtonText}</LoadingButton>
+      <LoadingButton variant={"contained"} type="submit" sx={{}}>
+        <Typography variant="button">{loginProps.actionButtonText}</Typography>
+      </LoadingButton>
       <CustomAlert
         inProp={errorAlertOpen}
         severityProp={"error"}

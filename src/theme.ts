@@ -12,6 +12,13 @@ export const theme = createTheme({
     },
   },
   components: {
+    MuiButton: {
+      defaultProps: {
+        sx: {
+          margin: "0.3rem",
+        },
+      },
+    },
     MuiTextField: {
       defaultProps: {
         margin: "dense",
@@ -33,7 +40,7 @@ export const theme = createTheme({
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
-          zIndex: 1000
+          zIndex: 1000,
         },
       },
     },

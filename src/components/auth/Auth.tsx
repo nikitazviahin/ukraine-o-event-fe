@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 
 import { LoginForm } from "./LoginForm";
@@ -23,12 +23,19 @@ export const Auth = () => {
       boxShadow={"2px 2px 5px #ccc"}
     >
       {isSignUp ? (
-        <RegisterForm actionButtonText={actionButtonText} setIsSignUp={setIsSignUp}/>
+        <RegisterForm
+          actionButtonText={actionButtonText}
+          setIsSignUp={setIsSignUp}
+        />
       ) : (
         <LoginForm actionButtonText={actionButtonText} />
       )}
-      <Button size="small" onClick={() => setIsSignUp(!isSignUp)}>
-        {switchButtonText}
+      <Button
+        variant={"contained"}
+        size="small"
+        onClick={() => setIsSignUp(!isSignUp)}
+      >
+        <Typography variant="button">{switchButtonText}</Typography>
       </Button>
     </Box>
   );

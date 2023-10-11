@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HttpStatusCode } from "axios";
 import { Controller, SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 
 import {
@@ -165,8 +165,10 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         {...register("orienteeringClub")}
       />
 
-      <LoadingButton type="submit">
-        {registerProps.actionButtonText}
+      <LoadingButton variant={"contained"} type="submit">
+        <Typography variant="button">
+          {registerProps.actionButtonText}
+        </Typography>
       </LoadingButton>
 
       <CustomAlert

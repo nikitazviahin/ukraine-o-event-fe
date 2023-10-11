@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { HttpStatusCode } from "axios";
@@ -144,7 +144,9 @@ export const CreateCompetitionForm = () => {
 
       <SelectClass selectedClasses={classes} setSelectedClasses={setClasses} />
 
-      <LoadingButton type="submit">{createCompetitionText}</LoadingButton>
+      <LoadingButton variant={"contained"} type="submit">
+        <Typography variant="button">{createCompetitionText}</Typography>
+      </LoadingButton>
 
       <CustomAlert
         inProp={successAlertOpen}

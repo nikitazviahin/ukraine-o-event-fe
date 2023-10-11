@@ -47,19 +47,22 @@ export const Navbar = () => {
           </Box>
 
           {isCreator && (
-            <Button onClick={handleCreateCompetitionRedirect}>
+            <Button
+              variant={"contained"}
+              onClick={handleCreateCompetitionRedirect}
+            >
               <Typography variant="button">{createCompetitionText}</Typography>
             </Button>
           )}
 
           {token ? (
-            <Button>
+            <Button variant={"contained"}>
               <Typography variant="button" onClick={handleLogout}>
                 {logOutText}
               </Typography>
             </Button>
           ) : (
-            <Button onClick={handleLogInRedirect}>
+            <Button variant={"contained"} onClick={handleLogInRedirect}>
               <Typography variant="button">{loginText}</Typography>
             </Button>
           )}
