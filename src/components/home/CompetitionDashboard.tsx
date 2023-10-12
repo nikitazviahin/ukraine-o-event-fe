@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { ICompetiton } from "../createCompetition/types/competition.interface";
 import { CompetitionServiceInstance } from "../../api/competition.api";
+import { ICompetiton } from "../../types/competition.types";
 
 export const CompetitionDashboard = () => {
   const [competitions, setCompetitions] = useState<ICompetiton[]>([]);

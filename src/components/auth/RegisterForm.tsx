@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { t } from "i18next";
 import { HttpStatusCode } from "axios";
 import { Controller, SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
@@ -10,23 +11,9 @@ import {
   useRegisterValidation,
 } from "../../validationHooks/useRegisterValidation";
 import { AuthServiceInstance } from "../../api/auth.api";
-import { CustomAlert } from "../CustomAlert";
+import { CustomAlert } from "../alerts/CustomAlert";
 import { parseISOString } from "../../helpers/parseISOString";
-
-export interface IRegisterFormProps {
-  actionButtonText: string;
-  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const emailLabelText = "Email";
-const passwordLabelText = "Password";
-const confirmPasswordLabelText = "Confirm password";
-const firstNameLabelText = "First name";
-const lastNameLabelText = "Last name";
-const dateOfBirthLabelText = "Date of birth";
-const orienteeringClubLabelText = "Orienteering Club";
-const userRegisteredSuccessfullyText =
-  "User registered successfully, redirecting to login...";
+import { IRegisterFormProps } from "./types/registerFormProps.interface";
 
 export const RegisterForm = (registerProps: IRegisterFormProps) => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
@@ -77,25 +64,25 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
       onSubmit={handleSubmit(onSubmitHandler)}
     >
       <TextField
-        type="email"
-        autoComplete="on"
-        label={emailLabelText}
+        type={"email"}
+        autoComplete={"on"}
+        label={t(`auth.email`)}
         error={!!errors["email"]}
         helperText={errors["email"] ? errors["email"].message : ""}
         {...register("email")}
       />
 
       <TextField
-        type="password"
-        label={passwordLabelText}
+        type={"password"}
+        label={t(`auth.password`)}
         error={!!errors["password"]}
         helperText={errors["password"] ? errors["password"].message : ""}
         {...register("password")}
       />
 
       <TextField
-        type="password"
-        label={confirmPasswordLabelText}
+        type={"password"}
+        label={t(`auth.confirmPassword`)}
         error={!!errors["passwordConfirm"]}
         helperText={
           errors["passwordConfirm"] ? errors["passwordConfirm"].message : ""
@@ -110,18 +97,18 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         }}
       >
         <TextField
-          type="text"
+          type={"text"}
           sx={{ paddingRight: "0.2rem" }}
-          label={firstNameLabelText}
+          label={t(`auth.firstName`)}
           error={!!errors["firstName"]}
           helperText={errors["firstName"] ? errors["firstName"].message : ""}
           {...register("firstName")}
         />
 
         <TextField
-          type="text"
+          type={"text"}
           sx={{ paddingLeft: "0.2rem" }}
-          label={lastNameLabelText}
+          label={t(`auth.lastName`)}
           error={!!errors["lastName"]}
           helperText={errors["lastName"] ? errors["lastName"].message : ""}
           {...register("lastName")}
@@ -134,8 +121,8 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         render={({ field }) => {
           return (
             <DatePicker
-              format="DD.MM.YYYY"
-              label={dateOfBirthLabelText}
+              format={"DD.MM.YYYY"}
+              label={t(`auth.dateOfBirth`)}
               onChange={field.onChange}
               disableFuture
               slotProps={{
@@ -145,7 +132,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
                 textField: {
                   error: !!errors["dateOfBirth"],
                   helperText: errors["dateOfBirth"]
-                    ? errors["dateOfBirth"].message
+                    ? t(`global.invalidDate`)
                     : "",
                   value: getValues().dateOfBirth,
                 },
@@ -156,17 +143,17 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
       />
 
       <TextField
-        type="text"
+        type={"text"}
         error={!!errors["orienteeringClub"]}
         helperText={
           errors["orienteeringClub"] ? errors["orienteeringClub"].message : ""
         }
-        label={orienteeringClubLabelText}
+        label={t(`auth.club`)}
         {...register("orienteeringClub")}
       />
 
-      <LoadingButton variant={"contained"} type="submit">
-        <Typography variant="button">
+      <LoadingButton variant={"contained"} type={"submit"}>
+        <Typography variant={"button"}>
           {registerProps.actionButtonText}
         </Typography>
       </LoadingButton>
@@ -175,7 +162,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         inProp={successAlertOpen}
         severityProp={"success"}
         onClickProp={() => setSuccessAlertOpen(false)}
-        alertTextProp={userRegisteredSuccessfullyText}
+        alertTextProp={t(`auth.userRegisteredSuccessfully`)}
       />
 
       <CustomAlert

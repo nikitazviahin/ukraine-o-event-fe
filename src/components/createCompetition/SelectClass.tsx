@@ -5,31 +5,28 @@ import {
   OutlinedInput,
   Select,
 } from "@mui/material";
+
 import { EClass } from "../../types/enums/class.enum";
+import { SelectClassProps } from "./types/selectClassProps.interface";
+import { t } from "i18next";
 
-export interface SelectClassProps {
-  selectedClasses: EClass[];
-  setSelectedClasses: React.Dispatch<React.SetStateAction<EClass[]>>;
-}
-
-const selectClassLabelText = "Select Classes";
 const classes = Object.values(EClass);
 
 export const SelectClass = (selectClassProps: SelectClassProps) => {
   return (
     <FormControl sx={{ margin: "0.5rem" }}>
-      <InputLabel>{selectClassLabelText}</InputLabel>
+      <InputLabel>{t(`competition.selectClass`)}</InputLabel>
       <Select
-        aria-label="selectClass"
+        aria-label={"selectClass"}
         id={"selectClass"}
-        label={selectClassLabelText}
+        label={t(`competition.selectClass`)}
         sx={{ width: "20rem" }}
         multiple
         value={selectClassProps.selectedClasses}
         onChange={(e: any) =>
           selectClassProps.setSelectedClasses(e.target.value)
         }
-        input={<OutlinedInput label={selectClassLabelText} />}
+        input={<OutlinedInput label={t(`competition.selectClass`)} />}
       >
         {classes.map((cl) => (
           <MenuItem key={cl} value={cl}>

@@ -5,12 +5,32 @@ const en = {
     auth: {
       logIn: "Log in",
       logOut: "Log out",
+      email: "Email",
+      password: "Password",
+      register: "Register user",
+      switchToLogin: "Switch to login",
+      switchToRegister: "Switch to register",
+      confirmPassword: "Confirm password",
+      firstName: "First name",
+      lastName: "Last name",
+      dateOfBirth: "Date of birth",
+      club: "Orienteering club",
     },
     competition: {
       createCompetition: "Create Competition",
+      selectClass: "Select Classes",
+      competitonNameLabel: "Name of the competition",
+      competitionDescriptionLabelText: "Description of the competition",
+      dateOfCompetitionLabelText: "Date of competition",
+      competitionPlaceText: "Place of the competition",
+      createCompetitionText: "Create competition",
+      competitionCreatedSuccessfullyText: "Competition created",
+      userRegisteredSuccessfully:
+        "User registered successfully, redirecting to login...",
     },
     global: {
       ukraineOEvent: "Ukraine O-Event",
+      invalidDate: "Date is invalid",
     },
     errors: {
       global: {
@@ -54,12 +74,32 @@ const ua = {
     auth: {
       logIn: "Вхід",
       logOut: "Вийти",
+      email: "Імейл",
+      password: "Пароль",
+      register: "Зареєструватись",
+      switchToLogin: "Перейти до логіну",
+      switchToRegister: "Перейти до реєстрації",
+      confirmPassword: "Підтвердити пароль",
+      firstName: "Ім'я",
+      lastName: "Прізвище",
+      dateOfBirth: "Дата народження",
+      club: "Клуб",
+      userRegisteredSuccessfully:
+        "Користувача зареєстровано, повертаємось на логін...",
     },
     competition: {
       createCompetition: "Створити змагання",
+      selectClass: "Оберіть групи",
+      competitonNameLabel: "Назва змагання",
+      competitionDescriptionLabelText: "Опис змагання",
+      dateOfCompetitionLabelText: "Дата змагання",
+      competitionPlaceText: "Місце проведення",
+      createCompetitionText: "Створити змагання",
+      competitionCreatedSuccessfullyText: "Змагання створено!",
     },
     global: {
       ukraineOEvent: "Ukraine O-Event",
+      invalidDate: "Невірна дата",
     },
     errors: {
       global: {

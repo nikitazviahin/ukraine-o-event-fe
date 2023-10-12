@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { Box, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
@@ -10,14 +11,8 @@ import {
 import { ILoginBody } from "../../types/auth.types";
 import { ERoutes } from "../../types/enums/route.enum";
 import { handleSubmitLogin } from "./helpers/handleSugmitLogin";
-import { CustomAlert } from "../CustomAlert";
-
-export interface ILoginFormProps {
-  actionButtonText: string;
-}
-
-const emailPlaceholderText = "Email";
-const passwordPlaceholderText = "Password";
+import { CustomAlert } from "../alerts/CustomAlert";
+import { ILoginFormProps } from "./types/loginFormProps.interface";
 
 export const LoginForm = (loginProps: ILoginFormProps) => {
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
@@ -50,26 +45,28 @@ export const LoginForm = (loginProps: ILoginFormProps) => {
       onSubmit={handleSubmit(onSubmitHandler)}
     >
       <TextField
-        autoComplete="on"
-        size="small"
-        placeholder={emailPlaceholderText}
-        type="email"
+        autoComplete={"on"}
+        size={"small"}
+        placeholder={t(`auth.email`)}
+        type={"email"}
         error={!!errors["email"]}
         helperText={errors["email"] ? errors["email"].message : ""}
         {...register("email")}
       />
 
       <TextField
-        size="small"
-        type="password"
-        placeholder={passwordPlaceholderText}
+        size={"small"}
+        type={"password"}
+        placeholder={t(`auth.password`)}
         error={!!errors["password"]}
         helperText={errors["password"] ? errors["password"].message : ""}
         {...register("password")}
       />
 
-      <LoadingButton variant={"contained"} type="submit">
-        <Typography variant="button">{loginProps.actionButtonText}</Typography>
+      <LoadingButton variant={"contained"} type={"submit"}>
+        <Typography variant={"button"}>
+          {loginProps.actionButtonText}
+        </Typography>
       </LoadingButton>
       <CustomAlert
         inProp={errorAlertOpen}

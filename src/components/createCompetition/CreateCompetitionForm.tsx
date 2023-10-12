@@ -1,6 +1,7 @@
+import { useState } from "react";
+import { t } from "i18next";
 import { Box, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useState } from "react";
 import { HttpStatusCode } from "axios";
 import { Controller, SubmitHandler } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
@@ -9,19 +10,12 @@ import {
   CreateCompetitionInput,
   useCreateCompetitionValidation,
 } from "../../validationHooks/useCreateCompetitionValidation";
-import { CustomAlert } from "../CustomAlert";
 import { CompetitionServiceInstance } from "../../api/competition.api";
 import { EClass } from "../../types/enums/class.enum";
 import { jwtTokenConst } from "../../constants/localStorage";
 import { SelectClass } from "./SelectClass";
 import { parseISOString } from "../../helpers/parseISOString";
-
-const competitonNameLabelText = "Name of the competition";
-const competitionDescriptionLabelText = "Description of the competition";
-const dateOfCompetitionLabelText = "Date of competition";
-const competitionPlaceText = "Place of the competition";
-const createCompetitionText = "Create competition";
-const competitionCreatedSuccessfullyText = "Competition created";
+import { CustomAlert } from "../alerts/CustomAlert";
 
 export const CreateCompetitionForm = () => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
@@ -76,7 +70,7 @@ export const CreateCompetitionForm = () => {
       flexDirection={"column"}
       maxWidth={"30rem"}
       alignItems={"center"}
-      margin="auto"
+      margin={"auto"}
       marginTop={"1rem"}
       padding={"1rem"}
       borderRadius={3}
@@ -86,8 +80,8 @@ export const CreateCompetitionForm = () => {
     >
       <TextField
         autoComplete={"text"}
-        type="text"
-        label={competitonNameLabelText}
+        type={"text"}
+        label={t(`competition.competitonNameLabel`)}
         sx={{ width: "20rem" }}
         error={!!errors["name"]}
         helperText={errors["name"] ? errors["name"].message : ""}
@@ -95,9 +89,9 @@ export const CreateCompetitionForm = () => {
       />
 
       <TextField
-        id="description"
-        type="text"
-        label={competitionDescriptionLabelText}
+        id={"description"}
+        type={"text"}
+        label={t(`competition.competitionDescriptionLabelText`)}
         sx={{ width: "20rem" }}
         multiline
         rows={5}
@@ -112,8 +106,8 @@ export const CreateCompetitionForm = () => {
         render={({ field }) => {
           return (
             <DatePicker
-              format="DD.MM.YYYY"
-              label={dateOfCompetitionLabelText}
+              format={"DD.MM.YYYY"}
+              label={t(`competition.dateOfCompetitionLabelText`)}
               onChange={field.onChange}
               sx={{ width: "20rem" }}
               slotProps={{
@@ -123,7 +117,7 @@ export const CreateCompetitionForm = () => {
                 textField: {
                   error: !!errors["competitionDate"],
                   helperText: errors["competitionDate"]
-                    ? errors["competitionDate"].message
+                    ? t(`global.invalidDate`)
                     : "",
                   value: getValues().competitionDate,
                 },
@@ -134,8 +128,8 @@ export const CreateCompetitionForm = () => {
       />
 
       <TextField
-        type="text"
-        label={competitionPlaceText}
+        type={"text"}
+        label={t(`competition.competitionPlaceText`)}
         sx={{ width: "20rem" }}
         error={!!errors["place"]}
         helperText={errors["place"] ? errors["place"].message : ""}
@@ -144,15 +138,17 @@ export const CreateCompetitionForm = () => {
 
       <SelectClass selectedClasses={classes} setSelectedClasses={setClasses} />
 
-      <LoadingButton variant={"contained"} type="submit">
-        <Typography variant="button">{createCompetitionText}</Typography>
+      <LoadingButton variant={"contained"} type={"submit"}>
+        <Typography variant={"button"}>
+          {t(`competition.createCompetitionText`)}
+        </Typography>
       </LoadingButton>
 
       <CustomAlert
         inProp={successAlertOpen}
         severityProp={"success"}
         onClickProp={() => setSuccessAlertOpen(false)}
-        alertTextProp={competitionCreatedSuccessfullyText}
+        alertTextProp={t(`competition.competitionCreatedSuccessfullyText`)}
       />
 
       <CustomAlert

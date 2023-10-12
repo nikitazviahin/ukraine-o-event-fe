@@ -1,5 +1,6 @@
-import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
+import { t } from "i18next";
+import { Box, Button, Typography } from "@mui/material";
 
 import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
@@ -7,8 +8,10 @@ import { RegisterForm } from "./RegisterForm";
 export const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const actionButtonText = isSignUp ? "register user" : "log in";
-  const switchButtonText = isSignUp ? "switch to login" : " switch to register";
+  const actionButtonText = isSignUp ? t(`auth.register`) : t(`auth.logIn`);
+  const switchButtonText = isSignUp
+    ? t(`auth.switchToLogin`)
+    : t(`auth.switchToRegister`);
 
   return (
     <Box
@@ -32,10 +35,10 @@ export const Auth = () => {
       )}
       <Button
         variant={"contained"}
-        size="small"
+        size={"small"}
         onClick={() => setIsSignUp(!isSignUp)}
       >
-        <Typography variant="button">{switchButtonText}</Typography>
+        <Typography variant={"button"}>{switchButtonText}</Typography>
       </Button>
     </Box>
   );
