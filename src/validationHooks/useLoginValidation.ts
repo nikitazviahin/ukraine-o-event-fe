@@ -1,18 +1,8 @@
 import { useForm } from "react-hook-form";
-import { TypeOf, object, string } from "zod";
+import { TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { LoginValidationErrorMessages } from "./constants/validationErrorMessages";
-
-const loginSchema = object({
-  email: string()
-    .nonempty(LoginValidationErrorMessages.emailIsRequired)
-    .email(LoginValidationErrorMessages.emailIsInvalid),
-  password: string()
-    .nonempty(LoginValidationErrorMessages.passwordIsRequired)
-    .min(6, LoginValidationErrorMessages.passwordMore)
-    .max(32, LoginValidationErrorMessages.passwordLess),
-});
+import { loginSchema } from "./schemas/logIn.schema";
 
 export type LoginInput = TypeOf<typeof loginSchema>;
 

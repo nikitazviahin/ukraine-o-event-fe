@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { languageConst } from "../../constants/localStorage";
 import { InterfaceLanguage } from "../../types/enums/language.enum";
-import i18n from "../../i18n/i28n";
+import i18n from "../../i18n/i18n";
 
 const currentLanguage = localStorage.getItem(languageConst);
 
