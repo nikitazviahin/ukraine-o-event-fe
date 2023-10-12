@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import dayjs from "dayjs";
 
 import { TDate } from "../types/date.type";
@@ -7,6 +8,6 @@ export function parseISOString(date: TDate): string {
     const parsedDate = dayjs(date).toISOString();
     return parsedDate;
   } catch (error) {
-    throw new Error("Invalid date entered");
+    throw new Error(t(`errors.global.invalidDate`));
   }
 }

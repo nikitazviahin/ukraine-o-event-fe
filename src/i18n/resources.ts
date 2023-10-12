@@ -15,6 +15,9 @@ const en = {
       ukraineOEvent: "Ukraine O-Event",
     },
     errors: {
+      global: {
+        invalidDate: "Invalid date entered",
+      },
       login: {
         emailIsRequired: "Email is required",
         emailIsInvalid: "Email is invalid",
@@ -61,6 +64,9 @@ const ua = {
       ukraineOEvent: "Ukraine O-Event",
     },
     errors: {
+      global: {
+        invalidDate: "Невірна дата",
+      },
       login: {
         emailIsRequired: "Введіть Імейл",
         emailIsInvalid: "Імейл не вірний",
