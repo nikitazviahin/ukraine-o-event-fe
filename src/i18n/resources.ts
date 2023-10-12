@@ -1,6 +1,4 @@
-import { appConfig } from "../config";
-
-const constraints = appConfig.constraints;
+import { constraints } from "../validationHooks/constraints";
 
 const en = {
   translations: {
@@ -31,7 +29,7 @@ const en = {
         passwordIsRequired: "Password is required",
         passwordMore: `Password must be more than ${constraints.passwordMin} characters`,
         passwordLess: `Password must be less than ${constraints.passwordMax} characters`,
-        passwrodConfirm: "Please confirm your password",
+        passwordConfirm: "Please confirm your password",
         firstNameRequired: "First name is required",
         lastNameRequired: "Last name is required",
         firstNameLess: `First name must be less than ${constraints.firstNameMax} characters`,
