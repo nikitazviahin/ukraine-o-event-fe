@@ -14,8 +14,10 @@ export async function handleSubmitLogin(values: ILoginBody) {
   const token = res.data.access_token;
   if (!token) throw new Error("Unable to get token");
 
+  localStorage.setItem(jwtTokenConst, token);
+
   const getUserProfileResponse =
-    await AuthServiceInstance.getUserProfileRequest(token);
+    await AuthServiceInstance.getUserProfileRequest();
 
   const isGetProfileSuccess =
     getUserProfileResponse &&
@@ -25,7 +27,6 @@ export async function handleSubmitLogin(values: ILoginBody) {
     throw new Error("Unable to get user's profile");
   }
 
-  localStorage.setItem(jwtTokenConst, token);
   localStorage.setItem(
     userDataConst,
     JSON.stringify(getUserProfileResponse.data)

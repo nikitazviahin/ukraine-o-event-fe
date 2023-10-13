@@ -10,7 +10,7 @@ import {
 } from "../../validationHooks/useLoginValidation";
 import { ILoginBody } from "../../types/auth.types";
 import { ERoutes } from "../../types/enums/route.enum";
-import { handleSubmitLogin } from "./helpers/handleSugmitLogin";
+import { handleSubmitLogin } from "./helpers/handleSubmitLogin";
 import { CustomAlert } from "../alerts/CustomAlert";
 import { ILoginFormProps } from "./types/loginFormProps.interface";
 

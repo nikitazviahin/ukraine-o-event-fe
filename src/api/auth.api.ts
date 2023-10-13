@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+
 import {
   IGetProfileResponse,
   ILoginBody,
@@ -7,13 +8,16 @@ import {
   ISignUpResponse,
 } from "../types/auth.types";
 import { getProfilePath, loginPath, signUpPath } from "../api/paths";
+import axiosInstance from "../axios/axios.interceptor";
 
 export class AuthService {
   public async postLoginRequest(
     userData: ILoginBody
   ): Promise<AxiosResponse<ILoginResponse>> {
     try {
-      const data = await axios.post<ILoginResponse>(loginPath, { ...userData });
+      const data = await axiosInstance.post<ILoginResponse>(loginPath, {
+        ...userData,
+      });
       return data;
     } catch (error) {
       throw error;
@@ -24,7 +28,7 @@ export class AuthService {
     userData: ISignUpBody
   ): Promise<AxiosResponse<ISignUpResponse>> {
     try {
-      const data = await axios.post<ISignUpResponse>(signUpPath, {
+      const data = await axiosInstance.post<ISignUpResponse>(signUpPath, {
         ...userData,
       });
       return data;
@@ -33,13 +37,11 @@ export class AuthService {
     }
   }
 
-  public async getUserProfileRequest(
-    token: string
-  ): Promise<AxiosResponse<IGetProfileResponse>> {
+  public async getUserProfileRequest(): Promise<
+    AxiosResponse<IGetProfileResponse>
+  > {
     try {
-      const data = await axios.get<IGetProfileResponse>(getProfilePath, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const data = await axiosInstance.get<IGetProfileResponse>(getProfilePath);
       return data;
     } catch (error) {
       throw error;

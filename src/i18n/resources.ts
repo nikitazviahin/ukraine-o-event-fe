@@ -132,7 +132,7 @@ const ua = {
         descriptionIsRequired: "Введіть опис змагання",
         descriptionMore: `Опис змагання повинен бути коротше ${constraints.competitionDescriptionMax} символів`,
         placeIsRequired: "Введіть назву місця проведення",
-        plaseMore: `Назва місця повинна бути коротше ${constraints.placeMax} символів`,
+        placeMore: `Назва місця повинна бути коротше ${constraints.placeMax} символів`,
       },
     },
   },

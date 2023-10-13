@@ -12,7 +12,6 @@ import {
 } from "../../validationHooks/useCreateCompetitionValidation";
 import { CompetitionServiceInstance } from "../../api/competition.api";
 import { EClass } from "../../types/enums/class.enum";
-import { jwtTokenConst } from "../../constants/localStorage";
 import { SelectClass } from "./SelectClass";
 import { parseISOString } from "../../helpers/parseISOString";
 import { CustomAlert } from "../alerts/CustomAlert";
@@ -22,8 +21,6 @@ export const CreateCompetitionForm = () => {
   const [errorAlertOpen, setErrorAlertOpen] = useState(false);
   const [errorAlertText, setErrorAlertText] = useState();
   const [classes, setClasses] = useState<EClass[]>([EClass.M21, EClass.W21]);
-
-  const token = localStorage.getItem(jwtTokenConst);
 
   const {
     control,
@@ -43,14 +40,11 @@ export const CreateCompetitionForm = () => {
     try {
       const dateofCompetitionValueISO = parseISOString(values.competitionDate);
 
-      const res = await CompetitionServiceInstance.createCompetition(
-        {
-          ...values,
-          classes,
-          competitionDate: dateofCompetitionValueISO,
-        },
-        token
-      );
+      const res = await CompetitionServiceInstance.createCompetition({
+        ...values,
+        classes,
+        competitionDate: dateofCompetitionValueISO,
+      });
 
       if (res.status === HttpStatusCode.Created) {
         setSuccessAlertOpen(true);
