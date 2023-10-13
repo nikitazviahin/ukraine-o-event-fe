@@ -52,7 +52,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
       }, 2000);
     } catch (error: any) {
       setErrorAlertOpen(() => true);
-      setErrorAlertText(() => error.response.data.message);
+      setErrorAlertText(() => error.message);
     }
   };
 
