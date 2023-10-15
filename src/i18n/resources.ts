@@ -2,6 +2,10 @@ import { constraints } from "../validationHooks/constraints";
 
 const en = {
   translations: {
+    global: {
+      ukraineOEvent: "Ukraine O-Event",
+      invalidDate: "Date is invalid",
+    },
     auth: {
       logIn: "Log in",
       logOut: "Log out",
@@ -28,9 +32,8 @@ const en = {
       userRegisteredSuccessfully:
         "User registered successfully, redirecting to login...",
     },
-    global: {
-      ukraineOEvent: "Ukraine O-Event",
-      invalidDate: "Date is invalid",
+    competitionDashboard: {
+      events: "All events",
     },
     errors: {
       global: {
@@ -71,6 +74,10 @@ const en = {
 
 const ua = {
   translations: {
+    global: {
+      ukraineOEvent: "Ukraine O-Event",
+      invalidDate: "Невірна дата",
+    },
     auth: {
       logIn: "Вхід",
       logOut: "Вийти",
@@ -97,9 +104,8 @@ const ua = {
       createCompetitionText: "Створити змагання",
       competitionCreatedSuccessfullyText: "Змагання створено!",
     },
-    global: {
-      ukraineOEvent: "Ukraine O-Event",
-      invalidDate: "Невірна дата",
+    competitionDashboard: {
+      events: "Всі змагання",
     },
     errors: {
       global: {
