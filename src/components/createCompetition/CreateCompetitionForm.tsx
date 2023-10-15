@@ -15,6 +15,7 @@ import { EClass } from "../../types/enums/class.enum";
 import { SelectClass } from "./SelectClass";
 import { parseISOString } from "../../helpers/parseISOString";
 import { CustomAlert } from "../alerts/CustomAlert";
+import { createCompetitionTextFieldStyle } from "../../styles/createCompetition.style";
 
 export const CreateCompetitionForm = () => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
@@ -76,7 +77,7 @@ export const CreateCompetitionForm = () => {
         autoComplete={"text"}
         type={"text"}
         label={t(`competition.competitonNameLabel`)}
-        sx={{ width: "20rem" }}
+        sx={createCompetitionTextFieldStyle}
         error={!!errors["name"]}
         helperText={errors["name"] ? errors["name"].message : ""}
         {...register("name")}
@@ -86,7 +87,7 @@ export const CreateCompetitionForm = () => {
         id={"description"}
         type={"text"}
         label={t(`competition.competitionDescriptionLabelText`)}
-        sx={{ width: "20rem" }}
+        sx={createCompetitionTextFieldStyle}
         multiline
         rows={5}
         error={!!errors["description"]}
@@ -103,7 +104,7 @@ export const CreateCompetitionForm = () => {
               format={"DD.MM.YYYY"}
               label={t(`competition.dateOfCompetitionLabelText`)}
               onChange={field.onChange}
-              sx={{ width: "20rem" }}
+              sx={createCompetitionTextFieldStyle}
               slotProps={{
                 field: {
                   readOnly: true,
@@ -124,7 +125,7 @@ export const CreateCompetitionForm = () => {
       <TextField
         type={"text"}
         label={t(`competition.competitionPlaceText`)}
-        sx={{ width: "20rem" }}
+        sx={createCompetitionTextFieldStyle}
         error={!!errors["place"]}
         helperText={errors["place"] ? errors["place"].message : ""}
         {...register("place")}

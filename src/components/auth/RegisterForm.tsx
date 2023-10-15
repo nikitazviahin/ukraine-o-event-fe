@@ -14,6 +14,11 @@ import { AuthServiceInstance } from "../../api/auth.api";
 import { CustomAlert } from "../alerts/CustomAlert";
 import { parseISOString } from "../../helpers/parseISOString";
 import { IRegisterFormProps } from "./types/registerFormProps.interface";
+import {
+  registerFormBoxStyle,
+  registerFormFirstNameStyle,
+  registerFormLastNameStyle,
+} from "../../styles/registerForm.style";
 
 export const RegisterForm = (registerProps: IRegisterFormProps) => {
   const [successAlertOpen, setSuccessAlertOpen] = useState(false);
@@ -90,15 +95,10 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
         {...register("passwordConfirm")}
       />
 
-      <Box
-        sx={{
-          display: "flex",
-          width: "16rem",
-        }}
-      >
+      <Box sx={registerFormBoxStyle}>
         <TextField
           type={"text"}
-          sx={{ paddingRight: "0.2rem" }}
+          sx={registerFormFirstNameStyle}
           label={t(`auth.firstName`)}
           error={!!errors["firstName"]}
           helperText={errors["firstName"] ? errors["firstName"].message : ""}
@@ -107,7 +107,7 @@ export const RegisterForm = (registerProps: IRegisterFormProps) => {
 
         <TextField
           type={"text"}
-          sx={{ paddingLeft: "0.2rem" }}
+          sx={registerFormLastNameStyle}
           label={t(`auth.lastName`)}
           error={!!errors["lastName"]}
           helperText={errors["lastName"] ? errors["lastName"].message : ""}

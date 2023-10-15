@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { languageConst } from "../../constants/localStorage";
 import { InterfaceLanguage } from "../../types/enums/language.enum";
 import i18n from "../../i18n/i18n";
+import { languageSelectorStyle } from "../../styles/languageSelector.style";
 
 const currentLanguage = localStorage.getItem(languageConst);
 
@@ -23,19 +24,7 @@ const LanguageSelector = () => {
   }, [language]);
 
   return (
-    <Select
-      sx={{
-        ".MuiOutlinedInput-notchedOutline": { border: 0 },
-        "@media (max-width:600px)": {
-          fontSize: "0.9rem",
-        },
-        "@media (max-width:450px)": {
-          fontSize: "0.6rem",
-        },
-      }}
-      value={language}
-      onChange={handleChange}
-    >
+    <Select sx={languageSelectorStyle} value={language} onChange={handleChange}>
       {Object.values(InterfaceLanguage).map((lang) => {
         return (
           <MenuItem key={lang} value={lang}>
