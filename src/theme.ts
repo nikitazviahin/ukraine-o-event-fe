@@ -9,6 +9,12 @@ export const theme = createTheme({
   typography: {
     button: {
       color: "#FFFFFF",
+      "@media (max-width:600px)": {
+        fontSize: "0.7rem",
+      },
+      "@media (max-width:450px)": {
+        fontSize: "0.55rem",
+      },
     },
   },
   components: {
